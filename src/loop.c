@@ -4,7 +4,9 @@
 #include <stdio.h>
 
 int main() {
-    Chip8 *chip8;
+    
+    Chip8 context = {0};
+    Chip8 *chip8 = &context;
 
     clear_memory(chip8);
     clear_display(chip8);

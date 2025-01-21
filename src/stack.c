@@ -30,6 +30,8 @@ uint16_t peek(Stack *stack) {
         return ret;
     }
 
+    return 999;
+
 }
 
 uint16_t pop(Stack *stack) {
@@ -41,4 +43,5 @@ uint16_t pop(Stack *stack) {
     }
 
     else printf("Empty Stack");
+    return 999;
 }
