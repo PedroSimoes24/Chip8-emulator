@@ -5,12 +5,11 @@
 
 #include "chip8.h"
 #include "stack.h"
-#include "stack.c"
 
 
 void clear_memory(Chip8 *chip8) {
 
-    for (int i = 0; i < MEMORY_SIZE; i++) {
+    for (int i = 0; i < 3977; i++) {
         chip8->memory[i] = 0;
     }
 }

@@ -1,13 +1,11 @@
 #include "chip8.h"
-#include "chip8.c"
 
 #include <stdlib.h>
-#include <stdint.h>
-
+#include <stdio.h>
 
 int main() {
-
     Chip8 *chip8;
+
     clear_memory(chip8);
     clear_display(chip8);
     load_fonts(chip8);

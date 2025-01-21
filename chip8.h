@@ -1,10 +1,10 @@
 #ifndef CHIP_8
+#define CHIP_8
 
 #include <stdlib.h>
 #include <stdint.h>
 
 #include "stack.h"
-#include "stack.c"
 
 
 #define MEMORY_SIZE 4096
@@ -17,16 +17,16 @@
 
 typedef struct Chip8 {
 
-    uint8_t memory[MEMORY_SIZE];                   //RAM
-    Stack stack;                                   //Stack
+    uint8_t memory[MEMORY_SIZE];                          //RAM
+    Stack stack;                                          //Stack
 
-    uint8_t V[16];                                 //V0-F
-    uint16_t PC;                                   //Program counter
-    uint16_t I;                                    //Index register
-    uint8_t delay_reg;                             //Delay register
-    uint8_t sound_reg;                             //Sound register
+    uint8_t V[16];                                        //V0-F
+    uint16_t PC;                                          //Program counter
+    uint16_t I;                                           //Index register
+    uint8_t delay_reg;                                    //Delay register
+    uint8_t sound_reg;                                    //Sound register
 
-    int display[DISPLAY_HEIGHT][DISPLAY_WIDTH];    //Display
+    uint8_t display[DISPLAY_HEIGHT][DISPLAY_WIDTH];    //Display
 
 } Chip8;
 
