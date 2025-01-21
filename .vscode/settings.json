@@ -3,7 +3,8 @@
         "stdlib.h": "c",
         "stack.c": "cpp",
         "stdio.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "sdl.h": "c"
     },
     "C_Cpp.default.compilerPath": "/usr/bin/gcc"
 }
