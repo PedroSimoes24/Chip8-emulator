@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "stdlib.h": "c"
-    }
+        "stdlib.h": "c",
+        "stack.c": "cpp"
+    },
+    "C_Cpp.default.compilerPath": "/usr/bin/gcc"
 }
