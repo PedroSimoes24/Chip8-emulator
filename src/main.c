@@ -6,7 +6,6 @@
 
 SDL_Window *window;
 SDL_Renderer *renderer;
-Chip8 chip8_context;
 Chip8 *chip8;
 
 int main() {
@@ -16,7 +15,13 @@ int main() {
         return 1;
     }
 
-    chip8_init();
+    chip8 = (Chip8*)calloc(1, sizeof(Chip8));
+    chip8_init(chip8);
+
+    if (chip8 == NULL) {
+        perror("Error allocating memory for chip8");
+        return 1;
+    }
 
     // Loop principal
     int running = 1;
@@ -38,21 +43,25 @@ int main() {
 
         // Definir as dimensões do quadrado
 
-        for (int i = 0; i < DISPLAY_HEIGHT - 10; i++) {
-            for (int j = 0; j < DISPLAY_WIDTH - 10; j++) {
+        for (int i = 0; i < DISPLAY_HEIGHT; i++) {
+            for (int j = 0; j < DISPLAY_WIDTH; j++) {
                 if (chip8->display[i][j] == 1) {
-                    SDL_Rect square = {j * DISPLAY_SCALE, i * DISPLAY_SCALE, DISPLAY_SCALE, DISPLAY_SCALE};
+                    SDL_Rect square = {i * DISPLAY_SCALE, j * DISPLAY_SCALE, DISPLAY_SCALE, DISPLAY_SCALE};
+
                     SDL_RenderFillRect(renderer, &square);
                 }
+            }
         }
-    }
+
+        invert_pixels(chip8);
+        printf("a\n");
 
         // Mostrar o que foi renderizado
         SDL_RenderPresent(renderer);
 
-    
-
-        SDL_Delay(16); // Pequena pausa (~60 FPS)
+        chip8->delay_reg = chip8->delay_reg == 0 ? 0 : chip8->delay_reg - 1;
+        chip8->sound_reg = chip8->sound_reg == 0 ? 0 : chip8->sound_reg - 1;
+        SDL_Delay(16); // Pequena pausa (~60 FPS) 16
 
         
     }
@@ -61,26 +70,9 @@ int main() {
     SDL_DestroyWindow(window);
     SDL_Quit();
 
+    free(chip8);
+
     return 0;
-}
-
-void chip8_init() {
-
-    chip8_context = {0};
-    Chip8 *chip8 = &chip8_context;
-
-
-
-    clear_display(chip8);
-    clear_memory(chip8);
-    load_fonts(chip8);
-
-
-    for (int i = 0; i < DISPLAY_HEIGHT; i++) {
-        for (int j = 0; j < DISPLAY_WIDTH; j++) {
-            if (i + j % 2 == 0) chip8->display[i][j] = 1;
-        }
-    }
 }
 
 
