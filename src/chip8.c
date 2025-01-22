@@ -13,7 +13,7 @@ void chip8_init(Chip8 *chip8) {
 
     for (int i = 0; i < DISPLAY_HEIGHT; i++) {
         for (int j = 0; j < DISPLAY_WIDTH; j++) {
-            if (i == j) chip8->display[i][j] = 1;
+            if (i == 0) chip8->display[i][j] = 1;
         }
     }
 }
@@ -45,9 +45,28 @@ void load_fonts(Chip8 *chip8) {
 
 void invert_pixels(Chip8 *chip8) {
 
+    int direita = 1;
+
     for (int i = 0; i < DISPLAY_HEIGHT; i++) {
-            for (int j = 0; j < DISPLAY_WIDTH; j++) {
-                chip8->display[i][j] = (chip8->display[i][j] + 1) % 2;
+        for (int j = 0; j < DISPLAY_WIDTH; j++) {
+            if (chip8->display[i][j] == 1) {
+                if (direita && j < DISPLAY_WIDTH - 1) {
+                    chip8->display[i][j] = 0;
+                    chip8->display[i][j + 1] = 1;
+                }
+                else if (direita){
+                    direita = 0;
+                }
+                else if (!direita && j - 1 >= 0) {
+                    chip8->display[i][j] = 0;
+                    chip8->display[i][j - 1] = 1;
+                }
+                else {
+                    direita = 1;
+                }
+
             }
+            
         }
+    }
 }
