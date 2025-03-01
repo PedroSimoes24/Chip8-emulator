@@ -15,4 +15,6 @@ void fetch_execute();
 
 void update_timers(); 
 
+int64_t timespec_to_ns(struct timespec t);
+
 #endif

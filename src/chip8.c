@@ -43,30 +43,21 @@ void load_fonts(Chip8 *chip8) {
 }
 
 
-void invert_pixels(Chip8 *chip8) {
+int invert_pixels(Chip8 *chip8, int counter) {
 
-    int direita = 1;
 
-    for (int i = 0; i < DISPLAY_HEIGHT; i++) {
-        for (int j = 0; j < DISPLAY_WIDTH; j++) {
-            if (chip8->display[i][j] == 1) {
-                if (direita && j < DISPLAY_WIDTH - 1) {
-                    chip8->display[i][j] = 0;
-                    chip8->display[i][j + 1] = 1;
-                }
-                else if (direita){
-                    direita = 0;
-                }
-                else if (!direita && j - 1 >= 0) {
-                    chip8->display[i][j] = 0;
-                    chip8->display[i][j - 1] = 1;
-                }
-                else {
-                    direita = 1;
-                }
-
-            }
-            
-        }
+    if (chip8->display[17][17] == 1 && counter >= 30) {
+        chip8->display[17][23] = 1;
+        chip8->display[17][17] = 0;
+        counter = 0;
     }
+
+    else if (chip8->display[17][23] == 1 && counter >= 30) {
+        chip8->display[17][17] = 1;
+        chip8->display[17][23] = 0;
+        counter = 0;
+    }
+
+    counter++;
+    return counter;
 }

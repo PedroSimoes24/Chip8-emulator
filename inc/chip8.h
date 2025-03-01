@@ -58,7 +58,7 @@ void clear_display(Chip8 *chip8);
 void load_fonts(Chip8 *chip8);
 
 //exprimental
-void invert_pixels(Chip8 *chip8);
+int invert_pixels(Chip8 *chip8, int counter);
 
 
 #endif
